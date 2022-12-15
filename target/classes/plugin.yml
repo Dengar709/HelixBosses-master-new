@@ -1,0 +1,14 @@
+main: Dengar.Helix.Bosses.PluginMain
+name: HelixBosses
+version: 1.0
+author: Dengar
+api-version: 1.18
+
+permissions:
+  BossesDeng.summonboss:
+    default: op
+commands:
+  summonboss:
+    usage: "/<command> boss"
+    permission: BossesDeng.summonboss
+    aliases: [ BossDeng ]
