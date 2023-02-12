@@ -29,6 +29,7 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Math.max;
 import static java.lang.Math.round;
 import static org.bukkit.GameMode.CREATIVE;
@@ -251,28 +252,39 @@ public class IceBoss extends Boss implements Listener {
             Location fbe = boss.getEyeLocation().clone().add(0,-7,12);
             Location fbs = boss.getEyeLocation().clone().add(-12,-7,0);
             Location fbw = boss.getEyeLocation().clone().add(0,-7,-12);
-            EnderCrystal FBN = fbn.getWorld().spawn(fbn, EnderCrystal.class, fall -> {
-                fall.setBeamTarget(marker.getLocation());
-                fall.setShowingBottom(false);
+            Vex FBN = fbn.getWorld().spawn(fbn, Vex.class, fall -> {
+                fall.setVisualFire(true);
+                fall.setAI(false);
+                fall.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+                fall.setHealth(10);
+
+                /*fall.setBeamTarget(marker.getLocation());
+                fall.setShowingBottom(false); */
             });
-            EnderCrystal FBE = fbe.getWorld().spawn(fbe, EnderCrystal.class, fall -> {
-                fall.setBeamTarget(marker.getLocation());
-                fall.setShowingBottom(false);
+            Vex FBE = fbe.getWorld().spawn(fbe, Vex.class, fall -> {
+                fall.setVisualFire(true);
+                fall.setAI(false);
+                fall.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+                fall.setHealth(10);
             });
-            EnderCrystal FBS = fbs.getWorld().spawn(fbs, EnderCrystal.class, fall -> {
-                fall.setBeamTarget(marker.getLocation());
-                fall.setShowingBottom(false);
+            Vex FBS = fbs.getWorld().spawn(fbs, Vex.class, fall -> {
+                fall.setVisualFire(true);
+                fall.setAI(false);
+                fall.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+                fall.setHealth(10);
             });
-            EnderCrystal FBW = fbw.getWorld().spawn(fbw, EnderCrystal.class, fall -> {
-                fall.setBeamTarget(marker.getLocation());
-                fall.setShowingBottom(false);
+            Vex FBW = fbw.getWorld().spawn(fbw, Vex.class, fall -> {
+                fall.setVisualFire(true);
+                fall.setAI(false);
+                fall.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(10);
+                fall.setHealth(10);
             });
             Bukkit.getScheduler().scheduleSyncDelayedTask(pl, () -> {
                 boss.getWorld().playSound(boss.getLocation(), Sound.ENTITY_PARROT_IMITATE_ENDER_DRAGON, 1, 0.5f);
                 List<Entity> inRoom = boss.getNearbyEntities(10,20,10);
                 inRoom.removeIf(e -> !(e instanceof Player));
                 List<Entity> unkilled = boss.getNearbyEntities(20,20,20);
-                unkilled.removeIf(e -> !(e instanceof EnderCrystal));
+                unkilled.removeIf(e -> !(e instanceof Vex));
                 int tracked = unkilled.size();
                 for (Entity e : inRoom) {
                     ((Player) e).addPotionEffect(new PotionEffect(HARM, 2, round(tracked/2), true, false, false));
